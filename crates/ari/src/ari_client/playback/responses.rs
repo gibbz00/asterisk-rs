@@ -1,12 +1,14 @@
 use derive_getters::Getters;
 use serde::Deserialize;
 
+use crate::*;
+
 /// Object representing the playback of media to a channel
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct Playback {
     /// ID for this playback operation
-    id: String,
+    id: PlaybackId,
     /// The URI for the media currently being played back
     media_uri: String,
     /// If a list of URIs is being played, the next media URI to be played back
