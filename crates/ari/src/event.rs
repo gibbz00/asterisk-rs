@@ -12,6 +12,8 @@ pub enum AsteriskEvent {
     StasisEnd(Event<StasisEnd>),
     ChannelCreated(Event<ChannelCreated>),
     ChannelDestroyed(Event<ChannelDestroyed>),
+    ChannelHold(Event<ChannelHold>),
+    ChannelUnhold(Event<ChannelUnhold>),
     ChannelVarset(Event<ChannelVarset>),
     ChannelHangupRequest(Event<ChannelHangupRequest>),
     ChannelDialplan(Event<ChannelDialplan>),
@@ -60,6 +62,23 @@ pub struct ChannelDestroyed {
     cause: i32,
     /// Text representation of the cause of the hangup
     cause_txt: String,
+    channel: Channel,
+}
+
+/// Channel initiated a media hold
+#[derive(Debug, Deserialize, Getters)]
+#[serde(rename_all = "snake_case")]
+pub struct ChannelHold {
+    channel: Channel,
+    /// The music on hold class that the initiator requested.
+    #[serde(rename = "musicclass")]
+    music_class: Option<String>,
+}
+
+/// Channel initiated a media unhold
+#[derive(Debug, Deserialize, Getters)]
+#[serde(rename_all = "snake_case")]
+pub struct ChannelUnhold {
     channel: Channel,
 }
 
