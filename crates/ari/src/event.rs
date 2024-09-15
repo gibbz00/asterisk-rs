@@ -18,8 +18,6 @@ pub enum AsteriskEvent {
     ChannelStateChange(Event<ChannelStateChange>),
     ChannelDtmfReceived(Event<ChannelDtmfReceived>),
     DeviceStateChanged(Event<DeviceStateChanged>),
-    #[serde(other)]
-    Unknown,
 }
 
 #[derive(Debug, Deserialize, Getters, Deref)]
