@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         match event {
             AsteriskEvent::ChannelDtmfReceived(event) => {
                 debug!("Received DTMF: {}", event.digit());
-                dtmf_buffer.lock().unwrap().push_str(event.digit());
+                dtmf_buffer.lock().unwrap().push(*event.digit());
             }
             AsteriskEvent::StasisEnd(_) => {
                 debug!("Stasis ended, DTMF buffer: {}", dtmf_buffer.lock().unwrap());

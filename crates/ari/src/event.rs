@@ -56,7 +56,9 @@ pub struct ChannelCreated {
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct ChannelDestroyed {
+    /// Integer representation of the cause of the hangup
     cause: i32,
+    /// Text representation of the cause of the hangup
     cause_txt: String,
     channel: Channel,
 }
@@ -100,7 +102,9 @@ pub struct ChannelStateChange {
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct ChannelDtmfReceived {
-    digit: String,
+    /// DTMF digit received (0-9, A-E, # or *)
+    // IMPROVEMENT: typeset
+    digit: char,
     duration_ms: i32,
     channel: Channel,
 }
