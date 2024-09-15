@@ -46,6 +46,7 @@ pub struct StasisEnd {
     channel: Channel,
 }
 
+/// Notification that a channel has been created
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct ChannelCreated {
