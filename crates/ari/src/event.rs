@@ -22,6 +22,7 @@ pub enum AsteriskEvent {
     ChannelDtmfReceived(Event<ChannelDtmfReceived>),
     DeviceStateChanged(Event<DeviceStateChanged>),
     PlaybackStarted(Event<PlaybackStarted>),
+    PlaybackFinished(Event<PlaybackFinished>),
 }
 
 #[derive(Debug, Deserialize, Getters, Deref)]
@@ -147,5 +148,12 @@ pub struct ChannelDtmfReceived {
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct PlaybackStarted {
+    playback: Playback,
+}
+
+/// Event showing the completion of a media playback operation
+#[derive(Debug, Deserialize, Getters)]
+#[serde(rename_all = "snake_case")]
+pub struct PlaybackFinished {
     playback: Playback,
 }
