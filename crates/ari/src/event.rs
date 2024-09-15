@@ -49,7 +49,7 @@ pub struct StasisEnd {
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct ChannelCreated {
-    channel: Option<Channel>,
+    channel: Channel,
 }
 
 #[derive(Debug, Deserialize, Getters)]
