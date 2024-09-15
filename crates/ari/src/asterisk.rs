@@ -17,7 +17,7 @@ pub enum AsteriskError {
     #[error("unsupported scheme, expected 'http' or 'https', found: '{}'", .0)]
     UnsupportedScheme(String),
     #[error("failed to connect")]
-    WebSocketConnect(tokio_tungstenite::tungstenite::Error),
+    WebSocketConnect(#[source] tokio_tungstenite::tungstenite::Error),
 }
 
 pub struct Asterisk;
