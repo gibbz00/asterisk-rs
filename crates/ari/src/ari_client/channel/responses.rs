@@ -4,6 +4,8 @@ use derive_getters::Getters;
 use serde::Deserialize;
 use serde_with::NoneAsEmptyString;
 
+use crate::*;
+
 /// A specific communication connection between Asterisk and an Endpoint.
 #[serde_with::serde_as]
 #[derive(Debug, Deserialize, Getters)]
@@ -12,7 +14,7 @@ pub struct Channel {
     /// Unique identifier of the channel.
     ///
     /// This is the same as the Uniqueid field in AMI.
-    id: String,
+    id: ChannelId,
     /// Protocol ID from underlying channel driver
     ///
     /// Call-ID for chan_pjsip; will be empty if not applicable or not implemented by driver.

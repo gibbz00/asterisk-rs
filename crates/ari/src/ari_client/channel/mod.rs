@@ -1,5 +1,8 @@
 mod core;
 
+mod id;
+pub use id::ChannelId;
+
 mod responses;
 pub use responses::*;
 
