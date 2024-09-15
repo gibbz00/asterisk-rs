@@ -14,6 +14,7 @@ pub enum AsteriskEvent {
     ChannelDestroyed(Event<ChannelDestroyed>),
     ChannelHold(Event<ChannelHold>),
     ChannelUnhold(Event<ChannelUnhold>),
+    ChannelToneDetected(Event<ChannelToneDetected>),
     ChannelVarset(Event<ChannelVarset>),
     ChannelHangupRequest(Event<ChannelHangupRequest>),
     ChannelDialplan(Event<ChannelDialplan>),
@@ -79,6 +80,12 @@ pub struct ChannelHold {
 #[derive(Debug, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct ChannelUnhold {
+    channel: Channel,
+}
+
+#[derive(Debug, Deserialize, Getters)]
+#[serde(rename_all = "snake_case")]
+pub struct ChannelToneDetected {
     channel: Channel,
 }
 
