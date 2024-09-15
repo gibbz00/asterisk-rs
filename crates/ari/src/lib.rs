@@ -9,3 +9,6 @@ pub(crate) use authorization::Authorization;
 
 mod event;
 pub use event::*;
+
+mod id_newtype;
+pub(crate) use id_newtype::id_newtype;

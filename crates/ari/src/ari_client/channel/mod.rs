@@ -1,7 +1,6 @@
-mod core;
+crate::id_newtype!(ChannelId);
 
-mod id;
-pub use id::ChannelId;
+mod core;
 
 mod responses;
 pub use responses::*;

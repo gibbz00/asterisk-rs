@@ -1,7 +1,6 @@
-mod core;
+crate::id_newtype!(PlaybackId);
 
-mod id;
-pub use id::PlaybackId;
+mod core;
 
 mod responses;
 pub use responses::*;
