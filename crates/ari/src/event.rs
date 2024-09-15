@@ -21,8 +21,8 @@ pub enum AsteriskEvent {
     ChannelDtmfReceived(ChannelEvent<ChannelDtmfReceived>),
     ChannelVarset(ChannelEvent<ChannelVarset>),
     DeviceStateChanged(Event<DeviceStateChanged>),
-    PlaybackStarted(Event<PlaybackStarted>),
-    PlaybackFinished(Event<PlaybackFinished>),
+    PlaybackStarted(PlaybackEvent<()>),
+    PlaybackFinished(PlaybackEvent<()>),
 }
 
 #[derive(Debug, Deserialize, Getters, Deref)]
@@ -41,6 +41,16 @@ pub struct Event<D> {
 #[serde(rename_all = "snake_case")]
 pub struct ChannelEvent<D> {
     channel: Channel,
+    #[deref]
+    #[getter(skip)]
+    #[serde(flatten)]
+    event: Event<D>,
+}
+
+#[derive(Debug, Deserialize, Getters, Deref)]
+#[serde(rename_all = "snake_case")]
+pub struct PlaybackEvent<D> {
+    playback: Playback,
     #[deref]
     #[getter(skip)]
     #[serde(flatten)]
@@ -114,18 +124,4 @@ pub struct ChannelDtmfReceived {
     // IMPROVEMENT: typeset
     digit: char,
     duration_ms: i32,
-}
-
-/// Event showing the start of a media playback operation
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
-pub struct PlaybackStarted {
-    playback: Playback,
-}
-
-/// Event showing the completion of a media playback operation
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
-pub struct PlaybackFinished {
-    playback: Playback,
 }
