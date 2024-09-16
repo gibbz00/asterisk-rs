@@ -12,3 +12,5 @@ pub use event::*;
 
 mod id_newtype;
 pub(crate) use id_newtype::id_newtype;
+
+pub(crate) mod serde_utils;

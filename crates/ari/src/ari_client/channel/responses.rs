@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use chrono::{DateTime, Utc};
 use serde::Deserialize;
 use serde_with::NoneAsEmptyString;
 
@@ -27,8 +28,8 @@ pub struct Channel {
     pub account_code: String,
     /// Current location in the dialplan
     pub dialplan: Dialplan,
-    #[serde(rename = "creationtime")]
-    pub creation_time: String,
+    #[serde(rename = "creationtime", with = "serde_utils::ari_date_format")]
+    pub creation_time: DateTime<Utc>,
     pub language: String,
     #[serde(default, rename = "channelvars")]
     pub variables: HashMap<String, String>,
