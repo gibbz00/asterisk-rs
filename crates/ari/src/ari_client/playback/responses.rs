@@ -4,7 +4,7 @@ use serde::Deserialize;
 use crate::*;
 
 /// Object representing the playback of media to a channel
-#[derive(Debug, Deserialize, Getters)]
+#[derive(Debug, Clone, Deserialize, Getters)]
 #[serde(rename_all = "snake_case")]
 pub struct Playback {
     /// ID for this playback operation
@@ -21,7 +21,7 @@ pub struct Playback {
     state: PlaybackState,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Copy, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PlaybackState {
     Queued,

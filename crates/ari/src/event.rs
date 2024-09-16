@@ -4,7 +4,7 @@ use serde::Deserialize;
 
 use crate::*;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 #[serde(tag = "type")]
 pub enum AsteriskEvent {
     StasisStart(ChannelEvent<StasisStart>),
@@ -24,7 +24,7 @@ pub enum AsteriskEvent {
     PlaybackFinished(PlaybackEvent<()>),
 }
 
-#[derive(Debug, Deserialize, Deref)]
+#[derive(Debug, Clone, Deserialize, Deref)]
 pub struct Event<D> {
     pub asterisk_id: String,
     pub application: String,
@@ -35,7 +35,7 @@ pub struct Event<D> {
     pub data: D,
 }
 
-#[derive(Debug, Deserialize, Deref)]
+#[derive(Debug, Clone, Deserialize, Deref)]
 pub struct ChannelEvent<D> {
     pub channel: Channel,
     #[deref]
@@ -43,7 +43,7 @@ pub struct ChannelEvent<D> {
     pub inner: Event<D>,
 }
 
-#[derive(Debug, Deserialize, Deref)]
+#[derive(Debug, Clone, Deserialize, Deref)]
 pub struct PlaybackEvent<D> {
     pub playback: Playback,
     #[deref]
@@ -51,13 +51,13 @@ pub struct PlaybackEvent<D> {
     pub inner: Event<D>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct StasisStart {
     pub args: Vec<String>,
     pub replace_channel: Option<Channel>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelDestroyed {
     /// Integer representation of the cause of the hangup
     pub cause: i32,
@@ -66,44 +66,44 @@ pub struct ChannelDestroyed {
 }
 
 /// Channel initiated a media hold
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelHold {
     /// The music on hold class that the initiator requested.
     #[serde(rename = "musicclass")]
     pub music_class: Option<String>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelVarset {
     pub variable: String,
     pub value: String,
     pub channel: Option<Channel>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelHangupRequest {
     pub soft: Option<bool>,
     pub cause: i32,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelDialplan {
     pub dialplan_app: String,
     pub dialplan_app_data: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct DeviceStateChanged {
     pub device_state: DeviceState,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct DeviceState {
     pub name: String,
     pub state: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct ChannelDtmfReceived {
     /// DTMF digit received (0-9, A-E, # or *)
     // IMPROVEMENT: typeset

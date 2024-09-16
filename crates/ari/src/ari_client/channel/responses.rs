@@ -8,7 +8,7 @@ use crate::*;
 
 /// A specific communication connection between Asterisk and an Endpoint.
 #[serde_with::serde_as]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct Channel {
     /// Unique identifier of the channel.
     ///
@@ -37,7 +37,7 @@ pub struct Channel {
     pub tenant_id: Option<String>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Copy, Deserialize)]
 pub enum ChannelState {
     Down,
     Rsrved,
@@ -64,13 +64,13 @@ pub struct ChannelVariable {
     pub id: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct CallerId {
     pub name: String,
     pub number: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct Dialplan {
     pub context: String,
     pub exten: String,
