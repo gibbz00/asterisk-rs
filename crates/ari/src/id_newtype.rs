@@ -9,6 +9,10 @@ macro_rules! id_newtype {
         pub struct $name(String);
 
         impl $name {
+            pub fn new(inner: impl Into<String>) -> Self {
+                Self(inner.into())
+            }
+
             pub fn inner(&self) -> &str {
                 &self.0
             }
