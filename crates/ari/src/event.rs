@@ -28,6 +28,7 @@ pub enum AsteriskEvent {
 pub struct Event<D> {
     pub asterisk_id: String,
     pub application: String,
+    #[serde(with = "serde_utils::ari_date_format")]
     pub timestamp: DateTime<Utc>,
     #[deref]
     #[serde(flatten)]
