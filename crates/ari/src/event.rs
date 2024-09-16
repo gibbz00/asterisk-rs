@@ -1,5 +1,4 @@
 use chrono::{DateTime, Utc};
-use derive_getters::Getters;
 use derive_more::derive::Deref;
 use serde::Deserialize;
 
@@ -25,103 +24,88 @@ pub enum AsteriskEvent {
     PlaybackFinished(PlaybackEvent<()>),
 }
 
-#[derive(Debug, Deserialize, Getters, Deref)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize, Deref)]
 pub struct Event<D> {
-    asterisk_id: String,
-    application: String,
-    timestamp: DateTime<Utc>,
+    pub asterisk_id: String,
+    pub application: String,
+    pub timestamp: DateTime<Utc>,
     #[deref]
-    #[getter(skip)]
     #[serde(flatten)]
     data: D,
 }
 
-#[derive(Debug, Deserialize, Getters, Deref)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize, Deref)]
 pub struct ChannelEvent<D> {
-    channel: Channel,
+    pub channel: Channel,
     #[deref]
-    #[getter(skip)]
     #[serde(flatten)]
     event: Event<D>,
 }
 
-#[derive(Debug, Deserialize, Getters, Deref)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize, Deref)]
 pub struct PlaybackEvent<D> {
-    playback: Playback,
+    pub playback: Playback,
     #[deref]
-    #[getter(skip)]
     #[serde(flatten)]
     event: Event<D>,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct StasisStart {
-    args: Vec<String>,
-    replace_channel: Option<Channel>,
+    pub args: Vec<String>,
+    pub replace_channel: Option<Channel>,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelDestroyed {
     /// Integer representation of the cause of the hangup
-    cause: i32,
+    pub cause: i32,
     /// Text representation of the cause of the hangup
-    cause_txt: String,
+    pub cause_txt: String,
 }
 
 /// Channel initiated a media hold
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelHold {
     /// The music on hold class that the initiator requested.
     #[serde(rename = "musicclass")]
-    music_class: Option<String>,
+    pub music_class: Option<String>,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelVarset {
-    variable: String,
-    value: String,
-    channel: Option<Channel>,
+    pub variable: String,
+    pub value: String,
+    pub channel: Option<Channel>,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelHangupRequest {
-    soft: Option<bool>,
-    cause: i32,
+    pub soft: Option<bool>,
+    pub cause: i32,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelDialplan {
-    dialplan_app: String,
-    dialplan_app_data: String,
+    pub dialplan_app: String,
+    pub dialplan_app_data: String,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct DeviceStateChanged {
-    device_state: DeviceState,
+    pub device_state: DeviceState,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct DeviceState {
-    name: String,
-    state: String,
+    pub name: String,
+    pub state: String,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelDtmfReceived {
     /// DTMF digit received (0-9, A-E, # or *)
     // IMPROVEMENT: typeset
-    digit: char,
-    duration_ms: i32,
+    pub digit: char,
+    pub duration_ms: i32,
 }

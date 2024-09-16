@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 
-use derive_getters::Getters;
 use serde::Deserialize;
 use serde_with::NoneAsEmptyString;
 
@@ -8,34 +7,33 @@ use crate::*;
 
 /// A specific communication connection between Asterisk and an Endpoint.
 #[serde_with::serde_as]
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct Channel {
     /// Unique identifier of the channel.
     ///
     /// This is the same as the Uniqueid field in AMI.
-    id: ChannelId,
+    pub id: ChannelId,
     /// Protocol ID from underlying channel driver
     ///
     /// Call-ID for chan_pjsip; will be empty if not applicable or not implemented by driver.
     #[serde_as(as = "NoneAsEmptyString")]
-    protocol_id: Option<String>,
+    pub protocol_id: Option<String>,
     /// Name of the channel, ex. 'SIP/foo-0000a7e3'
-    name: String,
-    state: ChannelState,
-    caller: CallerId,
-    connected: CallerId,
+    pub name: String,
+    pub state: ChannelState,
+    pub caller: CallerId,
+    pub connected: CallerId,
     #[serde(rename = "accountcode")]
-    account_code: String,
+    pub account_code: String,
     /// Current location in the dialplan
-    dialplan: Dialplan,
+    pub dialplan: Dialplan,
     #[serde(rename = "creationtime")]
-    creation_time: String,
-    language: String,
+    pub creation_time: String,
+    pub language: String,
     #[serde(default, rename = "channelvars")]
-    variables: HashMap<String, String>,
+    pub variables: HashMap<String, String>,
     #[serde(rename = "tenantid")]
-    tenant_id: Option<String>,
+    pub tenant_id: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -55,31 +53,27 @@ pub enum ChannelState {
     Unknown,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct RtpStatistics {
-    id: String,
+    pub id: String,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct ChannelVariable {
-    id: String,
+    pub id: String,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct CallerId {
-    name: String,
-    number: String,
+    pub name: String,
+    pub number: String,
 }
 
-#[derive(Debug, Deserialize, Getters)]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Deserialize)]
 pub struct Dialplan {
-    context: String,
-    exten: String,
-    priority: i32,
-    app_name: String,
-    app_data: String,
+    pub context: String,
+    pub exten: String,
+    pub priority: i32,
+    pub app_name: String,
+    pub app_data: String,
 }

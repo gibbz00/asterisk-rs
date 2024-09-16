@@ -18,8 +18,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     while let Some(event) = event_listener.recv().await {
         match event {
             AsteriskEvent::ChannelDtmfReceived(event) => {
-                debug!("Received DTMF: {}", event.digit());
-                dtmf_buffer.lock().unwrap().push(*event.digit());
+                debug!("Received DTMF: {}", event.digit);
+                dtmf_buffer.lock().unwrap().push(event.digit);
             }
             AsteriskEvent::StasisEnd(_) => {
                 debug!("Stasis ended, DTMF buffer: {}", dtmf_buffer.lock().unwrap());

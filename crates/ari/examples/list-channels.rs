@@ -11,7 +11,7 @@ async fn main() -> Result<(), AriClientError> {
     let client = AriClient::new("http://localhost:8088".parse().unwrap(), "asterisk", "asterisk");
 
     for channel in client.channel_list().await? {
-        tracing::info!("Channel ID: {}", channel.id());
+        tracing::info!("Channel ID: {}", channel.id);
     }
 
     Ok(())

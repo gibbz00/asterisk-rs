@@ -12,7 +12,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         if let AsteriskEvent::StasisStart(event) = event {
             request_client
                 .channel_play_media(
-                    event.channel().id(),
+                    &event.channel.id,
                     PlayMediaParams {
                         playback_id: None,
                         base_params: PlayMediaBaseParams {
