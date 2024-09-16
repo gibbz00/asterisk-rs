@@ -31,7 +31,7 @@ pub struct Event<D> {
     pub timestamp: DateTime<Utc>,
     #[deref]
     #[serde(flatten)]
-    data: D,
+    pub data: D,
 }
 
 #[derive(Debug, Deserialize, Deref)]
@@ -39,7 +39,7 @@ pub struct ChannelEvent<D> {
     pub channel: Channel,
     #[deref]
     #[serde(flatten)]
-    event: Event<D>,
+    pub inner: Event<D>,
 }
 
 #[derive(Debug, Deserialize, Deref)]
@@ -47,7 +47,7 @@ pub struct PlaybackEvent<D> {
     pub playback: Playback,
     #[deref]
     #[serde(flatten)]
-    event: Event<D>,
+    pub inner: Event<D>,
 }
 
 #[derive(Debug, Deserialize)]
