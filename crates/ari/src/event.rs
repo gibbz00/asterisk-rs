@@ -6,22 +6,23 @@ use crate::*;
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(tag = "type")]
+// Boxing to accommodate for the large size differences between the variants
 pub enum AsteriskEvent {
-    StasisStart(ChannelEvent<StasisStart>),
-    StasisEnd(ChannelEvent<()>),
-    ChannelCreated(ChannelEvent<()>),
-    ChannelDestroyed(ChannelEvent<ChannelDestroyed>),
-    ChannelHold(ChannelEvent<ChannelHold>),
-    ChannelUnhold(ChannelEvent<()>),
-    ChannelToneDetected(ChannelEvent<()>),
-    ChannelHangupRequest(ChannelEvent<ChannelHangupRequest>),
-    ChannelDialplan(ChannelEvent<ChannelDialplan>),
-    ChannelStateChange(ChannelEvent<()>),
-    ChannelDtmfReceived(ChannelEvent<ChannelDtmfReceived>),
-    ChannelVarset(ChannelEvent<ChannelVarset>),
-    DeviceStateChanged(Event<DeviceStateChanged>),
-    PlaybackStarted(PlaybackEvent<()>),
-    PlaybackFinished(PlaybackEvent<()>),
+    StasisStart(Box<ChannelEvent<StasisStart>>),
+    StasisEnd(Box<ChannelEvent<()>>),
+    ChannelCreated(Box<ChannelEvent<()>>),
+    ChannelDestroyed(Box<ChannelEvent<ChannelDestroyed>>),
+    ChannelHold(Box<ChannelEvent<ChannelHold>>),
+    ChannelUnhold(Box<ChannelEvent<()>>),
+    ChannelToneDetected(Box<ChannelEvent<()>>),
+    ChannelHangupRequest(Box<ChannelEvent<ChannelHangupRequest>>),
+    ChannelDialplan(Box<ChannelEvent<ChannelDialplan>>),
+    ChannelStateChange(Box<ChannelEvent<()>>),
+    ChannelDtmfReceived(Box<ChannelEvent<ChannelDtmfReceived>>),
+    ChannelVarset(Box<ChannelEvent<ChannelVarset>>),
+    DeviceStateChanged(Box<Event<DeviceStateChanged>>),
+    PlaybackStarted(Box<PlaybackEvent<()>>),
+    PlaybackFinished(Box<PlaybackEvent<()>>),
 }
 
 #[derive(Debug, Clone, Deserialize, Deref)]
