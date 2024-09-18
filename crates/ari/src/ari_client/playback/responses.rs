@@ -4,21 +4,21 @@ use serde::Deserialize;
 use crate::*;
 
 /// Object representing the playback of media to a channel
-#[derive(Debug, Clone, Deserialize, Getters)]
+#[derive(Debug, Clone, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub struct Playback {
     /// ID for this playback operation
-    id: PlaybackId,
+    pub id: PlaybackId,
     /// The URI for the media currently being played back
-    media_uri: String,
+    pub media_uri: String,
     /// If a list of URIs is being played, the next media URI to be played back
-    next_media_uri: Option<String>,
+    pub next_media_uri: Option<String>,
     /// URI for the channel or bridge to play the media on
-    target_uri: String,
+    pub target_uri: String,
     /// For media types that support multiple languages, the language requested for playback
-    language: Option<String>,
+    pub language: Option<String>,
     /// Current state of the playback operation
-    state: PlaybackState,
+    pub state: PlaybackState,
 }
 
 #[derive(Debug, Clone, Copy, Deserialize)]
