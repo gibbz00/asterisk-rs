@@ -1,4 +1,3 @@
-use derive_getters::Getters;
 use serde::Deserialize;
 
 use crate::*;

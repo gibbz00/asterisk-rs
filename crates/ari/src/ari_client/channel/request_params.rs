@@ -28,6 +28,7 @@ pub struct OriginateChannelParams<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct OriginateChannelWithIdParams<'a> {
     pub endpoint: &'a str,
+    #[serde(flatten)]
     pub params: OriginateParams<'a>,
     pub caller_id: Option<&'a str>,
     pub timeout: Option<u32>,
@@ -53,6 +54,22 @@ pub enum OriginateParams<'a> {
         #[serde(serialize_with = "join_serialize")]
         app_args: &'a [&'a str],
     },
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ChannelCreateParams<'a> {
+    pub endpoint: &'a str,
+    pub app: &'a str,
+    #[serde(skip_serializing_if = "<[_]>::is_empty")]
+    #[serde(serialize_with = "join_serialize")]
+    pub app_args: &'a [&'a str],
+    pub channel_id: Option<&'a str>,
+    pub other_channel_id: Option<&'a str>,
+    pub originator: Option<&'a str>,
+    #[serde(skip_serializing_if = "<[_]>::is_empty")]
+    #[serde(serialize_with = "join_serialize")]
+    pub formats: &'a [&'a str],
 }
 
 #[derive(Debug, Serialize)]
@@ -123,22 +140,6 @@ pub enum RecordingTermination {
 pub struct DialParams<'a> {
     pub caller: Option<&'a str>,
     pub timeout: Option<u32>,
-}
-
-#[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ChannelCreateParams<'a> {
-    pub endpoint: &'a str,
-    pub app: &'a str,
-    #[serde(skip_serializing_if = "<[_]>::is_empty")]
-    #[serde(serialize_with = "join_serialize")]
-    pub app_args: &'a [&'a str],
-    pub channel_id: Option<&'a str>,
-    pub other_channel_id: Option<&'a str>,
-    pub originator: Option<&'a str>,
-    #[serde(skip_serializing_if = "<[_]>::is_empty")]
-    #[serde(serialize_with = "join_serialize")]
-    pub formats: &'a [&'a str],
 }
 
 fn join_serialize<S>(slice: &[&str], s: S) -> Result<S::Ok, S::Error>
