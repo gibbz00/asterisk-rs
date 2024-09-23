@@ -4,17 +4,14 @@ macro_rules! id_newtype {
         $name:tt
     ) => {
         $(#[$attr])*
-        #[derive(Clone, Debug, PartialEq, Eq, Hash, ::derive_more::Display, ::serde::Serialize, ::serde::Deserialize)]
+        #[derive(Clone, Debug, PartialEq, Eq, Hash, ::derive_more::Display, ::derive_more::AsRef, ::serde::Serialize, ::serde::Deserialize)]
         #[serde(transparent)]
+        #[as_ref(str)]
         pub struct $name(String);
 
         impl $name {
             pub fn new(inner: impl Into<String>) -> Self {
                 Self(inner.into())
-            }
-
-            pub fn inner(&self) -> &str {
-                &self.0
             }
 
             pub fn into_inner(self) -> String {

@@ -3,44 +3,48 @@ use std::collections::HashMap;
 use crate::*;
 
 impl AriClient {
+    const BASE_PATH: &str = "channels";
+
     pub async fn channel_answer(&self, channel_id: &ChannelId) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "answer"], ()).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "answer"], ()).await
     }
 
     pub async fn channel_hangup(&self, channel_id: &ChannelId, reason: Reason) -> AriClientResult<()> {
-        self.authorized_delete(["channels", channel_id.inner()], reason).await
+        self.authorized_delete([Self::BASE_PATH, channel_id.as_ref()], reason).await
     }
 
     pub async fn channel_start_ringing(&self, channel_id: &ChannelId) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "ring"], ()).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "ring"], ()).await
     }
 
     pub async fn channel_stop_ringing(&self, channel_id: &ChannelId) -> AriClientResult<()> {
-        self.authorized_delete(["channels", channel_id.inner(), "ring"], ()).await
+        self.authorized_delete([Self::BASE_PATH, channel_id.as_ref(), "ring"], ()).await
     }
 
     pub async fn channel_send_dtmf(&self, channel_id: &ChannelId, params: SendDtmfParams<'_>) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "dtmf"], params).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "dtmf"], params).await
     }
 
     pub async fn channel_mute(&self, channel_id: &ChannelId, direction: Direction) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "mute"], direction).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "mute"], direction)
+            .await
     }
 
     pub async fn channel_unmute(&self, channel_id: &ChannelId, direction: Direction) -> AriClientResult<()> {
-        self.authorized_delete(["channels", channel_id.inner(), "mute"], direction).await
+        self.authorized_delete([Self::BASE_PATH, channel_id.as_ref(), "mute"], direction)
+            .await
     }
 
     pub async fn channel_hold(&self, channel_id: &ChannelId) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "hold"], ()).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "hold"], ()).await
     }
 
     pub async fn channel_unhold(&self, channel_id: &ChannelId) -> AriClientResult<()> {
-        self.authorized_delete(["channels", channel_id.inner(), "hold"], ()).await
+        self.authorized_delete([Self::BASE_PATH, channel_id.as_ref(), "hold"], ()).await
     }
 
     pub async fn channel_play_media(&self, channel_id: &ChannelId, params: PlayMediaParams<'_>) -> AriClientResult<Playback> {
-        self.authorized_post_json_response(["channels", channel_id.inner(), "play"], params)
+        self.authorized_post_json_response([Self::BASE_PATH, channel_id.as_ref(), "play"], params)
             .await
     }
 
@@ -51,29 +55,29 @@ impl AriClient {
         playback_id: &str,
         params: PlayMediaBaseParams<'_>,
     ) -> AriClientResult<Playback> {
-        self.authorized_post_json_response(["channels", channel_id.inner(), "play", playback_id, "media"], params)
+        self.authorized_post_json_response([Self::BASE_PATH, channel_id.as_ref(), "play", playback_id, "media"], params)
             .await
     }
 
     pub async fn channel_record(&self, channel_id: &ChannelId, params: RecordParams<'_>) -> AriClientResult<LiveRecording> {
-        self.authorized_post_json_response(["channels", channel_id.inner(), "record"], params)
+        self.authorized_post_json_response([Self::BASE_PATH, channel_id.as_ref(), "record"], params)
             .await
     }
 
     pub async fn channel_dial(&self, channel_id: &ChannelId, params: DialParams<'_>) -> AriClientResult<()> {
-        self.authorized_post(["channels", channel_id.inner(), "dial"], params).await
+        self.authorized_post([Self::BASE_PATH, channel_id.as_ref(), "dial"], params).await
     }
 
     pub async fn channel_list(&self) -> AriClientResult<Vec<Channel>> {
-        self.authorized_get(["channels"], ()).await
+        self.authorized_get([Self::BASE_PATH], ()).await
     }
 
     pub async fn channel_create(&self, params: ChannelCreateParams<'_>, variables: &HashMap<&str, &str>) -> AriClientResult<Channel> {
-        self.authorized_post_variables(["channels", "create"], params, variables).await
+        self.authorized_post_variables([Self::BASE_PATH, "create"], params, variables).await
     }
 
     pub async fn channel_get(self, channel_id: &ChannelId) -> AriClientResult<Channel> {
-        self.authorized_get(["channels", channel_id.inner()], ()).await
+        self.authorized_get([Self::BASE_PATH, channel_id.as_ref()], ()).await
     }
 
     pub async fn channel_originate<'a>(
@@ -81,7 +85,7 @@ impl AriClient {
         params: OriginateChannelParams<'a>,
         variables: &HashMap<&str, &str>,
     ) -> AriClientResult<Channel> {
-        self.authorized_post_variables(["channels"], params, variables).await
+        self.authorized_post_variables([Self::BASE_PATH], params, variables).await
     }
 
     // SUGGESTION(gibbz00): combine with above method and mave ID optional
@@ -91,7 +95,7 @@ impl AriClient {
         params: OriginateChannelWithIdParams<'a>,
         variables: &HashMap<&str, &str>,
     ) -> AriClientResult<Channel> {
-        self.authorized_post_variables(["channels", channel_id.inner()], params, variables)
+        self.authorized_post_variables([Self::BASE_PATH, channel_id.as_ref()], params, variables)
             .await
     }
 

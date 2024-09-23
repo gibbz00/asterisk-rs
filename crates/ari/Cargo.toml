@@ -8,7 +8,7 @@ version.workspace = true
 [dependencies]
 chrono = { workspace = true, features = ["serde"] }
 derive-getters.workspace = true
-derive_more = { workspace = true, features = ["deref", "display"] }
+derive_more = { workspace = true, features = ["as_ref", "deref", "display"] }
 futures-channel.workspace = true
 futures-util.workspace = true
 rand.workspace = true
@@ -24,6 +24,7 @@ tokio-tungstenite = { workspace = true, features = ["url"] }
 url.workspace = true
 
 [dev-dependencies]
+serde_test.workspace = true
 tokio = { workspace = true, features = ["rt-multi-thread"] }
 tracing = { workspace = true, features = ["attributes"] }
 tracing-subscriber = { workspace = true, features = ["env-filter"] }

@@ -1,5 +1,7 @@
-use serde::{ser::SerializeMap, Serialize, Serializer};
+use serde::{ser::SerializeMap, Serialize};
 use strum::AsRefStr;
+
+use crate::*;
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "direction", rename_all = "camelCase")]
@@ -140,13 +142,6 @@ pub enum RecordingTermination {
 pub struct DialParams<'a> {
     pub caller: Option<&'a str>,
     pub timeout: Option<u32>,
-}
-
-fn join_serialize<S>(slice: &[&str], s: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    s.serialize_str(&slice.join(","))
 }
 
 // NOTE: camelCase exception
