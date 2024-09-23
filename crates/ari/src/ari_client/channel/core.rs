@@ -95,53 +95,53 @@ impl AriClient {
             .await
     }
 
-    pub async fn channel_start_moh(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // pub async fn channel_start_moh(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_stop_moh(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // pub async fn channel_stop_moh(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_silence(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // pub async fn channel_silence(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_unsilince(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
-    pub async fn channel_get_variable(&self, _channel_id: &ChannelId) -> AriClientResult<ChannelVariable> {
-        unimplemented!()
-    }
+    // pub async fn channel_unsilince(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
+    // pub async fn channel_get_variable(&self, _channel_id: &ChannelId) -> AriClientResult<ChannelVariable> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_set_variable(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // pub async fn channel_set_variable(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_continue_in_dialplan(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // pub async fn channel_continue_in_dialplan(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    /// Transfer the channel to another ARI application.
-    /// Same as `move` in Asterisk
-    pub async fn channel_transfer(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
-        unimplemented!()
-    }
+    // /// Transfer the channel to another ARI application.
+    // /// Same as `move` in Asterisk
+    // pub async fn channel_transfer(&self, _channel_id: &ChannelId) -> AriClientResult<()> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_get_rtp_statistics(&self, _channel_id: &ChannelId) -> AriClientResult<RtpStatistics> {
-        unimplemented!()
-    }
+    // pub async fn channel_get_rtp_statistics(&self, _channel_id: &ChannelId) -> AriClientResult<RtpStatistics> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_snoop(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
-        unimplemented!()
-    }
+    // pub async fn channel_snoop(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
+    //     unimplemented!()
+    // }
 
-    // SUGGESTION(gibbz00): combine with above method and mave ID optional
-    pub async fn channel_snoop_with_id(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
-        unimplemented!()
-    }
+    // // SUGGESTION(gibbz00): combine with above method and mave ID optional
+    // pub async fn channel_snoop_with_id(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
+    //     unimplemented!()
+    // }
 
-    pub async fn channel_start_external_media(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
-        unimplemented!()
-    }
+    // pub async fn channel_start_external_media(&self, _channel_id: &ChannelId) -> AriClientResult<Channel> {
+    //     unimplemented!()
+    // }
 }
