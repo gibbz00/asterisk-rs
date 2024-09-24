@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use chrono::{DateTime, Utc};
 use derive_more::derive::Deref;
 use serde::Deserialize;
@@ -23,6 +25,31 @@ pub enum AsteriskEvent {
     DeviceStateChanged(Box<Event<DeviceStateChanged>>),
     PlaybackStarted(Box<PlaybackEvent<()>>),
     PlaybackFinished(Box<PlaybackEvent<()>>),
+    // TODO:
+    ApplicationMoveFailed(Event<HashMap<String, serde_json::Value>>),
+    ApplicationReplaced(Event<HashMap<String, serde_json::Value>>),
+    BridgeAttendedTransfer(Event<HashMap<String, serde_json::Value>>),
+    BridgeBlindTransfer(Event<HashMap<String, serde_json::Value>>),
+    BridgeCreated(Event<HashMap<String, serde_json::Value>>),
+    BridgeDestroyed(Event<HashMap<String, serde_json::Value>>),
+    BridgeMerged(Event<HashMap<String, serde_json::Value>>),
+    BridgeVideoSourceChanged(Event<HashMap<String, serde_json::Value>>),
+    ChannelCallerId(Event<HashMap<String, serde_json::Value>>),
+    ChannelConnectedLine(Event<HashMap<String, serde_json::Value>>),
+    ChannelEnteredBridge(Event<HashMap<String, serde_json::Value>>),
+    ChannelLeftBridge(Event<HashMap<String, serde_json::Value>>),
+    ChannelTalkingFinished(Event<HashMap<String, serde_json::Value>>),
+    ChannelTalkingStarted(Event<HashMap<String, serde_json::Value>>),
+    ChannelUserevent(Event<HashMap<String, serde_json::Value>>),
+    ContactStatusChange(Event<HashMap<String, serde_json::Value>>),
+    Dial(Event<HashMap<String, serde_json::Value>>),
+    EndpointStateChange(Event<HashMap<String, serde_json::Value>>),
+    PeerStatusChange(Event<HashMap<String, serde_json::Value>>),
+    PlaybackContinuing(Event<HashMap<String, serde_json::Value>>),
+    RecordingFailed(Event<HashMap<String, serde_json::Value>>),
+    RecordingFinished(Event<HashMap<String, serde_json::Value>>),
+    RecordingStarted(Event<HashMap<String, serde_json::Value>>),
+    TextMessageReceived(Event<HashMap<String, serde_json::Value>>),
 }
 
 #[derive(Debug, Clone, Deserialize, Deref)]
